@@ -1,0 +1,5 @@
+﻿[Log]
+EnableLog=1
+EnableLogOutput=1
+OutputStackTrace=1
+

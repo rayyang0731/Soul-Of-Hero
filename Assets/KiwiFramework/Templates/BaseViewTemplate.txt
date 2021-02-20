@@ -1,0 +1,12 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using KiwiFramework.Core;
+using KiwiFramework.UI;
+using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
+
+public class &ViewName& : BaseView
+{
+&UIObjectField&
+}

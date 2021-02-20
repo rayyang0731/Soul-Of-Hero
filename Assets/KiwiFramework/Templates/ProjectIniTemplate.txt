@@ -1,0 +1,11 @@
+﻿[UI]
+BaseViewPath=/Scripts/UI/BaseView/
+UIViewPath=/Scripts/UI/UIView/
+
+[Game]
+UseAssetBundle=0
+Develop=1
+
+[GameAssetsPath]
+ViewPrefabPath=Assets/GameAssets/Prefab/UI/View/
+
