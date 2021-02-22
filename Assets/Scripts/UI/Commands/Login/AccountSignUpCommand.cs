@@ -11,7 +11,7 @@ public class AccountSignUpCommand : Command
         var data = (KV<string, string>) notice.Body;
         var account = data.Key;
         var password = data.Value;
-        KiwiLog.Info("account : ", account, " | password : ", password);
+        KiwiLog.Info("Try To Register Account - account : ", account, " | password : ", password);
 
         var loginProxy = Facade.GetProxy<LoginProxy>();
         loginProxy.account = account;

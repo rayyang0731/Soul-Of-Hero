@@ -12,6 +12,8 @@ public class SignInSuccessfulCommand : Command
         var loginProxy = Facade.GetProxy<LoginProxy>();
         PlayerPrefs.SetString("account", loginProxy.account);
         PlayerPrefs.SetString("password", loginProxy.password);
-        KiwiLog.Info("登陆成功 account : ", loginProxy.account, " | password : ", loginProxy.password);
+        KiwiLog.Info("登录成功 account : ", loginProxy.account, " | password : ", loginProxy.password);
+        
+        
     }
 }
