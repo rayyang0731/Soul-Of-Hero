@@ -99,13 +99,12 @@ namespace KiwiFramework.Core
         /// <param name="timer">计时器</param>
         public void AddTimer(Timer timer)
         {
-            if (!_timers.Contains(timer))
-            {
-                _timers.Add(timer);
+            if (_timers.Contains(timer)) return;
+
+            _timers.Add(timer);
 #if UNITY_EDITOR
-                UpdateRuntimeTimerCount();
+            UpdateRuntimeTimerCount();
 #endif
-            }
         }
 
         /// <summary>
@@ -115,9 +114,7 @@ namespace KiwiFramework.Core
         public void RemoveTimer(Timer timer)
         {
             if (_timers.Contains(timer))
-            {
                 _removes.Add(timer);
-            }
 
             Recycle(timer);
         }

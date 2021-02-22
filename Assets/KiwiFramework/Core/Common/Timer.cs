@@ -22,7 +22,7 @@ namespace KiwiFramework.Core
         /// <summary>
         /// 是否已经释放过资源
         /// </summary>
-        private bool _disposed = false;
+        private bool _disposed;
 
         #region Unity Actions
 
@@ -64,7 +64,7 @@ namespace KiwiFramework.Core
         #endregion
 
         #endregion
-        
+
         #region Public Properties
 
         /// <summary>
@@ -90,10 +90,7 @@ namespace KiwiFramework.Core
         /// <summary>
         /// 计时器是否停止
         /// </summary>
-        public bool IsStop
-        {
-            get { return !this.IsPause && this.RemainTime <= 0; }
-        }
+        public bool IsStop => !IsPause && RemainTime <= 0;
 
         /// <summary>
         /// 计时器是否忽略时间缩放
@@ -108,10 +105,7 @@ namespace KiwiFramework.Core
         /// <summary>
         /// 已用时间
         /// </summary>
-        public float ElapsedTime
-        {
-            get { return this.Duration - this.RemainTime; }
-        }
+        public float ElapsedTime => Duration - RemainTime;
 
         /// <summary>
         /// 剩余时间
@@ -121,10 +115,7 @@ namespace KiwiFramework.Core
         /// <summary>
         /// 计时器已经完成的百分比
         /// </summary>
-        public float Ratio
-        {
-            get { return 1 - this.RemainTime / this.Duration; }
-        }
+        public float Ratio => 1 - RemainTime / Duration;
 
         /// <summary>
         /// 下次回调时间
@@ -158,42 +149,39 @@ namespace KiwiFramework.Core
         private static Timer _startup(float duration, Action<Timer> onCallback, float callFrequency = 0f,
             bool loop = false, bool ignoreTimeScale = false)
         {
-            if (onCallback != null)
-            {
-                var timer = Timer.Create(duration, onCallback, callFrequency, loop, ignoreTimeScale);
-                timer.Startup();
-                return timer;
-            }
-            else
-                throw new Exception("启动计时器失败,回调方法不能为Null");
+            if (onCallback == null) throw new Exception("启动计时器失败,回调方法不能为Null");
+
+            var timer = Create(duration, onCallback, callFrequency, loop, ignoreTimeScale);
+            timer.Startup();
+            return timer;
         }
 
         /// <summary>
-        /// 创建一个Timer
+        /// 创建计时器
         /// </summary>
+        /// <param name="duration">持续时间</param>
+        /// <param name="callback">到时回调</param>
+        /// <param name="callFrequency">回调频率</param>
+        /// <param name="loop">是否循环</param>
+        /// <param name="ignoreTimeScale">是否忽略 TimeScale</param>
+        /// <returns>创建好的计时器对象</returns>
         public static Timer Create(float duration, Action<Timer> callback, float callFrequency = 0f, bool loop = false,
             bool ignoreTimeScale = false)
         {
-            if (callback != null)
-            {
-                var timer = TimerManager.Instance.Get();
+            if (callback == null) throw new Exception("创建计时器失败,回调方法不能为Null");
 
-                timer.Guid = GUIDHelper.Get();
-                timer.Duration = duration;
-                timer._onCallback = callback;
-                timer.CallbackFrequency = callFrequency;
-                timer.Loop = loop;
-                timer.IgnoreTimeScale = ignoreTimeScale;
+            var timer = TimerManager.Instance.Get();
 
-                timer.ResetRunVariable();
+            timer.Guid = GUIDHelper.Get();
+            timer.Duration = duration;
+            timer._onCallback = callback;
+            timer.CallbackFrequency = callFrequency;
+            timer.Loop = loop;
+            timer.IgnoreTimeScale = ignoreTimeScale;
 
-                return timer;
-            }
-            else
-            {
-                Debug.LogError("创建计时器失败,回调方法不能为Null");
-                return null;
-            }
+            timer.ResetRunVariable();
+
+            return timer;
         }
 
         /// <summary>
@@ -239,9 +227,9 @@ namespace KiwiFramework.Core
         /// </summary>
         private void ResetRunVariable()
         {
-            this.IsPause = true;
-            this.RemainTime = 0f;
-            this.NextCallbackTime = 0f;
+            IsPause = true;
+            RemainTime = 0f;
+            NextCallbackTime = 0f;
         }
 
         /// <summary>
@@ -249,12 +237,12 @@ namespace KiwiFramework.Core
         /// </summary>
         private void InitTick()
         {
-            this.IsPause = false;
-            this.RemainTime = this.Duration;
-            this.StartCount++;
+            IsPause = false;
+            RemainTime = Duration;
+            StartCount++;
 
-            if (this.CallbackFrequency > 0)
-                this.NextCallbackTime = this.RemainTime - this.CallbackFrequency;
+            if (CallbackFrequency > 0)
+                NextCallbackTime = RemainTime - CallbackFrequency;
         }
 
         /// <summary>
@@ -262,7 +250,7 @@ namespace KiwiFramework.Core
         /// </summary>
         private void ResetAndRecycle()
         {
-            this.ResetRunVariable();
+            ResetRunVariable();
             ClearAllEvent();
             TimerManager.Instance.RemoveTimer(this);
         }
@@ -283,7 +271,7 @@ namespace KiwiFramework.Core
 
         private void Close()
         {
-            if (this._disposed) return;
+            if (_disposed) return;
             Guid = string.Empty;
             Duration = 0;
             Loop = false;
@@ -303,7 +291,7 @@ namespace KiwiFramework.Core
             FinishCount = 0;
             _args = null;
 
-            this._disposed = true;
+            _disposed = true;
         }
 
         #endregion
@@ -316,7 +304,7 @@ namespace KiwiFramework.Core
         public void Startup()
         {
             //表示未在计时
-            if (this.RemainTime <= 0)
+            if (RemainTime <= 0)
                 Restart();
         }
 
@@ -325,7 +313,7 @@ namespace KiwiFramework.Core
         /// </summary>
         public void Restart()
         {
-            this.InitTick();
+            InitTick();
 
             TimerManager.Instance.AddTimer(this);
 
@@ -338,9 +326,9 @@ namespace KiwiFramework.Core
         /// </summary>
         public void Pause()
         {
-            if (this.IsPause) return;
+            if (IsPause) return;
 
-            this.IsPause = true;
+            IsPause = true;
 
             if (_onPause != null)
                 _onPause.Invoke(this);
@@ -351,9 +339,9 @@ namespace KiwiFramework.Core
         /// </summary>
         public void Resume()
         {
-            if (!this.IsPause) return;
+            if (!IsPause) return;
 
-            this.IsPause = false;
+            IsPause = false;
 
             if (_onResume != null)
                 _onResume.Invoke(this);
@@ -385,36 +373,36 @@ namespace KiwiFramework.Core
         {
             if (IsPause) return;
 
-            this.RemainTime -= deltaTime;
-            if (this.RemainTime <= this.NextCallbackTime)
+            RemainTime -= deltaTime;
+            if (RemainTime <= NextCallbackTime)
             {
                 _onCallback.Invoke(this);
                 if (RemainTime <= 0f)
                 {
                     if (Loop)
                     {
-                        this.InitTick();
+                        InitTick();
                     }
                     else
                     {
-                        this.Stop();
+                        Stop();
                     }
 
-                    this.FinishCount++;
+                    FinishCount++;
                     return;
                 }
 
-                if (this.CallbackFrequency > 0)
+                if (CallbackFrequency > 0)
                 {
-                    this.NextCallbackTime -= this.CallbackFrequency;
-                    if (this.NextCallbackTime < 0)
+                    NextCallbackTime -= CallbackFrequency;
+                    if (NextCallbackTime < 0)
                     {
-                        this.NextCallbackTime = 0f;
+                        NextCallbackTime = 0f;
                     }
                 }
                 else
                 {
-                    this.NextCallbackTime = 0f;
+                    NextCallbackTime = 0f;
                 }
             }
             else if (_onUpdate != null)
@@ -429,7 +417,7 @@ namespace KiwiFramework.Core
         public Timer AddStartCallback(Action<Timer> callback)
         {
             if (callback != null)
-                this._onStart += callback;
+                _onStart += callback;
 
             return this;
         }
@@ -448,7 +436,7 @@ namespace KiwiFramework.Core
         public Timer AddCallback(Action<Timer> callback)
         {
             if (callback != null)
-                this._onCallback += callback;
+                _onCallback += callback;
 
             return this;
         }
@@ -536,7 +524,7 @@ namespace KiwiFramework.Core
         public Timer AddStopCallback(Action<Timer> callback)
         {
             if (callback != null)
-                this._onStop += callback;
+                _onStop += callback;
 
             return this;
         }
@@ -547,7 +535,7 @@ namespace KiwiFramework.Core
         public Timer RemoveStopCallback(Action<Timer> callback)
         {
             if (callback != null)
-                this._onStop -= callback;
+                _onStop -= callback;
 
             return this;
         }
@@ -558,7 +546,7 @@ namespace KiwiFramework.Core
         public Timer AddCancelCallback(Action<Timer> callback)
         {
             if (callback != null)
-                this._onCancel += callback;
+                _onCancel += callback;
 
             return this;
         }
@@ -569,7 +557,7 @@ namespace KiwiFramework.Core
         public Timer RemoveCancelCallback(Action<Timer> callback)
         {
             if (callback != null)
-                this._onCancel -= callback;
+                _onCancel -= callback;
 
             return this;
         }
@@ -581,7 +569,7 @@ namespace KiwiFramework.Core
         {
             if (duration > 0)
             {
-                this.Duration = duration;
+                Duration = duration;
             }
 
             return this;
@@ -592,7 +580,7 @@ namespace KiwiFramework.Core
         /// </summary>
         public Timer SetLoop(bool loop)
         {
-            this.Loop = loop;
+            Loop = loop;
             return this;
         }
 
@@ -601,7 +589,7 @@ namespace KiwiFramework.Core
         /// </summary>
         public Timer SetCallbackFrequency(float callbackFrequency)
         {
-            this.CallbackFrequency = callbackFrequency > 0 ? callbackFrequency : 0;
+            CallbackFrequency = callbackFrequency > 0 ? callbackFrequency : 0;
             return this;
         }
 
@@ -610,7 +598,7 @@ namespace KiwiFramework.Core
         /// </summary>
         public Timer SetParams(params object[] objs)
         {
-            this._args = objs;
+            _args = objs;
             return this;
         }
 
@@ -621,8 +609,8 @@ namespace KiwiFramework.Core
         /// <param name="index">参数索引</param>
         public T GetParam<T>(int index)
         {
-            if (this._args != null && index < this._args.Length)
-                return (T) this._args[index];
+            if (_args != null && index < _args.Length)
+                return (T) _args[index];
             return default(T);
         }
 

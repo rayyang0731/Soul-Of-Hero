@@ -39,7 +39,6 @@ namespace KiwiFramework.Core
 
         #endregion
 
-
         #region Private Methods
 
         private void AddUpdate(IUpdate update)
