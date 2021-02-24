@@ -1,4 +1,5 @@
 ﻿using KiwiFramework.Core;
+using KiwiFramework.Core.XLuaModule;
 using UnityEngine;
 
 
@@ -14,8 +15,11 @@ namespace KiwiFramework.Core
             try
             {
                 InitializeSetting();
-
+#if UseLua
+                LuaVM.Instance.DoFile("GameMain");
+#else
                 AppFacade.Instance.Startup();
+#endif
             }
             catch (System.Exception e)
             {

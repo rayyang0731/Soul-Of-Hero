@@ -1,138 +1,108 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using KiwiFramework.Core;
-using KiwiFramework.Core.Interface;
+﻿using GameFramework;
+using JetBrains.Annotations;
 using UnityEngine;
 using XLua;
 
-
-/// <summary>
-/// Lua 虚拟机管理器
-/// </summary>
-[LuaCallCSharp]
-public class LuaVM : Singleton<LuaVM>, IUpdate
+namespace KiwiFramework.Core.XLuaModule
 {
-    private readonly LuaEnv _luaEnv;
-
     /// <summary>
-    /// Lua GC 间隔时间
+    /// Lua 虚拟机管理器
     /// </summary>
-    private const float GCTimeGap = 15f;
-
-    /// <summary>
-    /// Lua GC 计时器
-    /// </summary>
-    private Timer GCTimer;
-
-    private LuaVM()
+    public class LuaVM : Singleton<LuaVM>
     {
-        _luaEnv = new LuaEnv();
+        private readonly LuaEnv _luaEnv;
 
-        _luaEnv.AddLoader(OnLoader);
-        //初始化 GC 回收 Tick
-        GCTimer = Timer.Startup(GCTimeGap, timer => { _luaEnv.Tick(); }, loop: true, ignoreTimeScale: true);
-    }
+        /// <summary>
+        /// Lua GC 间隔时间
+        /// </summary>
+        private const float GcTimeGap = 15f;
 
-    ~LuaVM()
-    {
-        GCTimer.Stop();
-    }
+        /// <summary>
+        /// Lua GC 计时器
+        /// </summary>
+        private readonly Timer _gcTimer;
 
-    /// <summary>
-    /// 创建 Lua Table
-    /// </summary>
-    /// <returns>Lua Table 对象</returns>
-    public LuaTable CreateTable()
-    {
-        return _luaEnv.NewTable();
-    }
-
-    /// <summary>
-    /// 当有lua文件require时
-    /// </summary>
-    private byte[] OnLoader(ref string filepath)
-    {
-        filepath = LuaDir(filepath);
-        LuaLoader(filepath, out var lua);
-
-        return !string.IsNullOrEmpty(lua) ? System.Text.Encoding.UTF8.GetBytes(lua) : null;
-    }
-
-    /// <summary>
-    /// lua path
-    /// </summary>
-    private string LuaDir(string fileName)
-    {
-        return string.Format("Luas/{0}.lua", fileName);
-    }
-
-    /// <summary>
-    /// lua 加载器
-    /// </summary>
-    public bool LuaLoader(string path, out string lua)
-    {
-#if UNITY_EDITOR
-        if (Config.IsSimulationMode)
+        private LuaVM()
         {
-            path = Path.Combine(Application.dataPath, path);
+            _luaEnv = new LuaEnv();
 
-            Debug.Log(path);
+            _luaEnv.AddLoader(OnLoader);
+            //初始化 GC 回收 Tick
+            _gcTimer = Timer.Startup(GcTimeGap, timer => { _luaEnv.Tick(); }, loop: true, ignoreTimeScale: true);
+        }
 
-            if (File.Exists(path))
+        ~LuaVM()
+        {
+            _gcTimer.Stop();
+            _luaEnv.Dispose();
+        }
+
+        /// <summary>
+        /// 创建 Lua Table
+        /// </summary>
+        /// <returns>Lua Table 对象</returns>
+        public LuaTable CreateTable()
+        {
+            return _luaEnv.NewTable();
+        }
+
+        /// <summary>
+        /// 当有lua文件require时调用
+        /// </summary>
+        /// <param name="luaFileName">Lua 文件名称</param>
+        /// <returns></returns>
+        private static byte[] OnLoader(ref string luaFileName)
+        {
+            return LuaLoader(luaFileName, out var lua) ? System.Text.Encoding.UTF8.GetBytes(lua) : null;
+        }
+
+
+        /// <summary>
+        /// lua 加载器
+        /// </summary>
+        private static bool LuaLoader(string luaFileName, out string lua)
+        {
+            using (zstring.Block())
             {
-                lua = File.ReadAllText(path);
-                return true;
+                var textAsset = AssetManager.Instance.Load<TextAsset>(zstring.Concat(luaFileName, ".lua"));
+                if (textAsset.text != null)
+                {
+                    lua = textAsset.text;
+                    return true;
+                }
             }
-            else
-                Debug.LogError("加载lua失败，path：" + path);
+
+            lua = string.Empty;
+            return false;
         }
-        else
+
+        public LuaTable NewLuaTable()
         {
-            TextAsset ta = AssetLoader.Load<TextAsset>(path.ToLower(), AssetType.TXT);
+            var table = _luaEnv.NewTable();
+            var metaTable = _luaEnv.NewTable();
 
-            if (ta != null)
-            {
-                lua = ta.text;
-                return true;
-            }
-            else
-            {
-                Debug.LogError("加载lua失败，path：" + path);
-            }
+            metaTable.Set("__index", _luaEnv.Global);
+            table.SetMetaTable(metaTable);
+
+            metaTable.Dispose();
+
+            return table;
         }
 
-#else //加载bundle
-        TextAsset ta = AssetLoader.Load<TextAsset>(path.ToLower(), AssetType.TXT);
-
-        if(ta != null)
+        /// <summary>
+        /// 加载 Lua 文件
+        /// </summary>
+        /// <param name="luaName">Lua 文件名称</param>
+        /// <param name="luaTable">要对应的 LuaTable 对象</param>
+        public void DoFile(string luaName, LuaTable luaTable = null)
         {
-            lua = ta.text;
-            return true;
+            var luaContent = $"require '{luaName}'";
+            DoString(luaContent, luaName, luaTable);
         }
-        else
+
+        public object[] DoString(string lua, string chunk, LuaTable env)
         {
-            Debug.LogError("加载lua失败，path：" + path);
+            return _luaEnv.DoString(lua, chunk, env);
         }
-#endif
-        lua = string.Empty;
-        return false;
-    }
-
-    public LuaTable NewScript()
-    {
-        LuaTable script = _luaEnv.NewTable();
-
-        LuaTable meta = _luaEnv.NewTable();
-        meta.Set("__index", _luaEnv.Global);
-        script.SetMetaTable(meta);
-        meta.Dispose();
-
-        return script;
-    }
-
-    public void DoString(string lua, string chunk, LuaTable env)
-    {
-        _luaEnv.DoString(lua, chunk, env);
     }
 }

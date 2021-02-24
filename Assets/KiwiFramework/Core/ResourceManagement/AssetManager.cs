@@ -8,12 +8,12 @@ namespace KiwiFramework.Core
 {
     public class AssetManager : Singleton<AssetManager>
     {
-        public BaseAssetLoader AssetLoader;
+        private readonly BaseAssetLoader _assetLoader;
 
         public AssetManager()
         {
 #if UNITY_EDITOR
-            AssetLoader = new AssetLoaderForEditor();
+            _assetLoader = new AssetLoaderForEditor();
 #endif
         }
 
@@ -25,7 +25,7 @@ namespace KiwiFramework.Core
         /// <returns></returns>
         public T Load<T>(string name) where T : Object
         {
-            return AssetLoader.Load<T>(name);
+            return _assetLoader.Load<T>(name);
         }
     }
 }

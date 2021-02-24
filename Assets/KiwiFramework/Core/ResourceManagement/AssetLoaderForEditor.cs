@@ -15,7 +15,7 @@ namespace KiwiFramework.Core
     /// </summary>
     public class AssetLoaderForEditor : BaseAssetLoader
     {
-        private bool initialized = false;
+        private bool _initialized = false;
 
         private string[] _assetSearchPaths = null;
 
@@ -40,7 +40,7 @@ namespace KiwiFramework.Core
         /// <summary>
         /// 全部资源的路径
         /// </summary>
-        private readonly Dictionary<string, string> AllAssetPaths = new Dictionary<string, string>();
+        private readonly Dictionary<string, string> _allAssetPaths = new Dictionary<string, string>();
 
         /// <summary>
         /// 获取资源对象路径
@@ -49,7 +49,7 @@ namespace KiwiFramework.Core
         /// <returns></returns>
         private string GetAssetPath(string name)
         {
-            AllAssetPaths.TryGetValue(name, out var assetPath);
+            _allAssetPaths.TryGetValue(name, out var assetPath);
             if (assetPath != null) return assetPath;
 
             var assetGUIDs = AssetDatabase.FindAssets(name + " t:Object", AssetSearchPaths);
@@ -63,13 +63,13 @@ namespace KiwiFramework.Core
                     if (fileName != name)
                         continue;
                     repeatAssets.Add(path);
-                    if (AllAssetPaths.ContainsKey(name))
-                        AllAssetPaths[name] = path;
+                    if (_allAssetPaths.ContainsKey(name))
+                        _allAssetPaths[name] = path;
                     else
-                        AllAssetPaths.Add(name, path);
+                        _allAssetPaths.Add(name, path);
                 }
 
-                if (repeatAssets.Count <= 1) return AllAssetPaths[name];
+                if (repeatAssets.Count <= 1) return _allAssetPaths[name];
 
                 var sb = new StringBuilder();
                 sb.AppendLine("不应该有重名的的资源 : ");
@@ -80,10 +80,10 @@ namespace KiwiFramework.Core
             }
             else
             {
-                AllAssetPaths[name] = string.Empty;
+                _allAssetPaths[name] = string.Empty;
             }
 
-            return AllAssetPaths[name];
+            return _allAssetPaths[name];
         }
 
         /// <summary>
