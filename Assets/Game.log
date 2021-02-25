@@ -45,7 +45,7 @@ KiwiFramework.Core.XLuaModule.LuaVM:DoString(String, String, LuaTable) (at Asset
 KiwiFramework.Core.XLuaModule.LuaVM:DoFile(String, LuaTable) (at Assets/KiwiFramework/Core/XLuaModule/LuaVM.cs:100)
 KiwiFramework.Core.AppLauncher:Start() (at Assets/KiwiFramework/Core/AppLauncher.cs:19)
 
-LUA: Game Main
+LUA: Lua Facade :::
 UnityEngine.Debug:Log(Object)
 XLua.StaticLuaCallbacks:Print(IntPtr) (at Assets/XLua/Src/StaticLuaCallbacks.cs:629)
 XLua.LuaDLL.Lua:lua_pcall(IntPtr, Int32, Int32, Int32)

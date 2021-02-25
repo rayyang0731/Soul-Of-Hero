@@ -1,11 +1,13 @@
 ---
 --- LuaFacade.lua
 ---
-local name = ...
-local LuaFacade = {}
-_G[modname] = LuaFacade
-package.loaded[modname] = LuaFacade  --return modname的功能
-setmetatable(LuaFacade, { __index = _G })
-_EVN[modname] = LuaFacade
 
-print(name)
+---@module LuaFacade
+local LuaFacade = {}
+
+module(... , LuaFacade)
+----------------------------------------------------------------------------------
+
+
+
+return LuaFacade

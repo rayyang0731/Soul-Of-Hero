@@ -3,6 +3,7 @@ using GameFramework;
 using JetBrains.Annotations;
 using UnityEditor;
 using UnityEngine;
+using XLua;
 using Object = UnityEngine.Object;
 
 namespace KiwiFramework.Core
@@ -10,6 +11,7 @@ namespace KiwiFramework.Core
     /// <summary>
     /// 打印日志
     /// </summary>
+    [LuaCallCSharp]
     public static partial class KiwiLog
     {
         private static readonly string Tag = "[" + PlayerSettings.productName + "]";
