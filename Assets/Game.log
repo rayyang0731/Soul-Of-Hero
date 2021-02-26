@@ -2,10 +2,10 @@
 UnityEngine.DebugLogHandler:LogFormat(LogType, Object, String, Object[])
 KiwiFramework.Core.KiwiLogHandler:LogFormat(LogType, Object, String, Object[]) (at Assets/KiwiFramework/Core/Log/KiwiLogHandler.cs:136)
 UnityEngine.Logger:Log(LogType, String, Object, Object)
-KiwiFramework.Core.KiwiLog:Print(LogType, String, Object) (at Assets/KiwiFramework/Core/Log/KiwiLog.cs:173)
-KiwiFramework.Core.KiwiLog:PrintFormat(LogType, Object, String, String[]) (at Assets/KiwiFramework/Core/Log/KiwiLog.cs:287)
-KiwiFramework.Core.KiwiLog:PrintFormat(LogType, String, String[]) (at Assets/KiwiFramework/Core/Log/KiwiLog.cs:273)
-KiwiFramework.Core.KiwiLog:InfoFormat(String, String[]) (at Assets/KiwiFramework/Core/Log/KiwiLog.cs:69)
+KiwiFramework.Core.KiwiLog:Print(LogType, String, Object) (at Assets/KiwiFramework/Core/Log/KiwiLog.cs:175)
+KiwiFramework.Core.KiwiLog:PrintFormat(LogType, Object, String, String[]) (at Assets/KiwiFramework/Core/Log/KiwiLog.cs:289)
+KiwiFramework.Core.KiwiLog:PrintFormat(LogType, String, String[]) (at Assets/KiwiFramework/Core/Log/KiwiLog.cs:275)
+KiwiFramework.Core.KiwiLog:InfoFormat(String, String[]) (at Assets/KiwiFramework/Core/Log/KiwiLog.cs:71)
 KiwiFramework.Core.Singleton`1:get_Instance() (at Assets/KiwiFramework/Core/Singleton/Singleton.cs:16)
 KiwiFramework.Core.Timer:Create(Single, Action`1, Single, Boolean, Boolean) (at Assets/KiwiFramework/Core/Common/Timer.cs:173)
 KiwiFramework.Core.Timer:_startup(Single, Action`1, Single, Boolean, Boolean) (at Assets/KiwiFramework/Core/Common/Timer.cs:154)
@@ -19,10 +19,10 @@ KiwiFramework.Core.AppLauncher:Start() (at Assets/KiwiFramework/Core/AppLauncher
 UnityEngine.DebugLogHandler:LogFormat(LogType, Object, String, Object[])
 KiwiFramework.Core.KiwiLogHandler:LogFormat(LogType, Object, String, Object[]) (at Assets/KiwiFramework/Core/Log/KiwiLogHandler.cs:136)
 UnityEngine.Logger:Log(LogType, String, Object, Object)
-KiwiFramework.Core.KiwiLog:Print(LogType, String, Object) (at Assets/KiwiFramework/Core/Log/KiwiLog.cs:173)
-KiwiFramework.Core.KiwiLog:PrintFormat(LogType, Object, String, String[]) (at Assets/KiwiFramework/Core/Log/KiwiLog.cs:287)
-KiwiFramework.Core.KiwiLog:PrintFormat(LogType, String, String[]) (at Assets/KiwiFramework/Core/Log/KiwiLog.cs:273)
-KiwiFramework.Core.KiwiLog:InfoFormat(String, String[]) (at Assets/KiwiFramework/Core/Log/KiwiLog.cs:69)
+KiwiFramework.Core.KiwiLog:Print(LogType, String, Object) (at Assets/KiwiFramework/Core/Log/KiwiLog.cs:175)
+KiwiFramework.Core.KiwiLog:PrintFormat(LogType, Object, String, String[]) (at Assets/KiwiFramework/Core/Log/KiwiLog.cs:289)
+KiwiFramework.Core.KiwiLog:PrintFormat(LogType, String, String[]) (at Assets/KiwiFramework/Core/Log/KiwiLog.cs:275)
+KiwiFramework.Core.KiwiLog:InfoFormat(String, String[]) (at Assets/KiwiFramework/Core/Log/KiwiLog.cs:71)
 KiwiFramework.Core.Singleton`1:get_Instance() (at Assets/KiwiFramework/Core/Singleton/Singleton.cs:16)
 KiwiFramework.Core.AppLauncher:Start() (at Assets/KiwiFramework/Core/AppLauncher.cs:19)
 
@@ -30,10 +30,10 @@ KiwiFramework.Core.AppLauncher:Start() (at Assets/KiwiFramework/Core/AppLauncher
 UnityEngine.DebugLogHandler:LogFormat(LogType, Object, String, Object[])
 KiwiFramework.Core.KiwiLogHandler:LogFormat(LogType, Object, String, Object[]) (at Assets/KiwiFramework/Core/Log/KiwiLogHandler.cs:136)
 UnityEngine.Logger:Log(LogType, String, Object, Object)
-KiwiFramework.Core.KiwiLog:Print(LogType, String, Object) (at Assets/KiwiFramework/Core/Log/KiwiLog.cs:173)
-KiwiFramework.Core.KiwiLog:PrintFormat(LogType, Object, String, String[]) (at Assets/KiwiFramework/Core/Log/KiwiLog.cs:287)
-KiwiFramework.Core.KiwiLog:PrintFormat(LogType, String, String[]) (at Assets/KiwiFramework/Core/Log/KiwiLog.cs:273)
-KiwiFramework.Core.KiwiLog:InfoFormat(String, String[]) (at Assets/KiwiFramework/Core/Log/KiwiLog.cs:69)
+KiwiFramework.Core.KiwiLog:Print(LogType, String, Object) (at Assets/KiwiFramework/Core/Log/KiwiLog.cs:175)
+KiwiFramework.Core.KiwiLog:PrintFormat(LogType, Object, String, String[]) (at Assets/KiwiFramework/Core/Log/KiwiLog.cs:289)
+KiwiFramework.Core.KiwiLog:PrintFormat(LogType, String, String[]) (at Assets/KiwiFramework/Core/Log/KiwiLog.cs:275)
+KiwiFramework.Core.KiwiLog:InfoFormat(String, String[]) (at Assets/KiwiFramework/Core/Log/KiwiLog.cs:71)
 KiwiFramework.Core.Singleton`1:get_Instance() (at Assets/KiwiFramework/Core/Singleton/Singleton.cs:16)
 KiwiFramework.Core.XLuaModule.LuaVM:LuaLoader(String, String&) (at Assets/KiwiFramework/Core/XLuaModule/LuaVM.cs:67)
 KiwiFramework.Core.XLuaModule.LuaVM:OnLoader(String&) (at Assets/KiwiFramework/Core/XLuaModule/LuaVM.cs:56)
@@ -45,13 +45,25 @@ KiwiFramework.Core.XLuaModule.LuaVM:DoString(String, String, LuaTable) (at Asset
 KiwiFramework.Core.XLuaModule.LuaVM:DoFile(String, LuaTable) (at Assets/KiwiFramework/Core/XLuaModule/LuaVM.cs:100)
 KiwiFramework.Core.AppLauncher:Start() (at Assets/KiwiFramework/Core/AppLauncher.cs:19)
 
-LUA: Lua Facade :::
-UnityEngine.Debug:Log(Object)
-XLua.StaticLuaCallbacks:Print(IntPtr) (at Assets/XLua/Src/StaticLuaCallbacks.cs:629)
-XLua.LuaDLL.Lua:lua_pcall(IntPtr, Int32, Int32, Int32)
-XLua.LuaEnv:DoString(Byte[], String, LuaTable) (at Assets/XLua/Src/LuaEnv.cs:268)
-XLua.LuaEnv:DoString(String, String, LuaTable) (at Assets/XLua/Src/LuaEnv.cs:288)
-KiwiFramework.Core.XLuaModule.LuaVM:DoString(String, String, LuaTable) (at Assets/KiwiFramework/Core/XLuaModule/LuaVM.cs:105)
-KiwiFramework.Core.XLuaModule.LuaVM:DoFile(String, LuaTable) (at Assets/KiwiFramework/Core/XLuaModule/LuaVM.cs:100)
-KiwiFramework.Core.AppLauncher:Start() (at Assets/KiwiFramework/Core/AppLauncher.cs:19)
+LuaException: c# exception in LoadFromCustomLoaders:System.NullReferenceException: Object reference not set to an instance of an object
+  at KiwiFramework.Core.XLuaModule.LuaVM.LuaLoader (System.String luaFileName, System.String& lua) [0x0002d] in /Users/wasabiyu/Documents/Git/Soul Of Hero/Assets/KiwiFramework/Core/XLuaModule/LuaVM.cs:68 
+  at KiwiFramework.Core.XLuaModule.LuaVM.OnLoader (System.String& luaFileName) [0x00001] in /Users/wasabiyu/Documents/Git/Soul Of Hero/Assets/KiwiFramework/Core/XLuaModule/LuaVM.cs:56 
+  at XLua.StaticLuaCallbacks.LoadFromCustomLoaders (System.IntPtr L) [0x00036] in /Users/wasabiyu/Documents/Git/Soul Of Hero/Assets/XLua/Src/StaticLuaCallbacks.cs:786 
+stack traceback:
+	[C]: in ?
+	[C]: in function 'require'
+	GameMain:1: in main chunk
+	[C]: in function 'require'
+	[string "GameMain"]:1: in main chunk
+XLua.LuaEnv.ThrowExceptionFromError (System.Int32 oldTop) (at Assets/XLua/Src/LuaEnv.cs:441)
+XLua.LuaEnv.DoString (System.Byte[] chunk, System.String chunkName, XLua.LuaTable env) (at Assets/XLua/Src/LuaEnv.cs:274)
+XLua.LuaEnv.DoString (System.String chunk, System.String chunkName, XLua.LuaTable env) (at Assets/XLua/Src/LuaEnv.cs:288)
+KiwiFramework.Core.XLuaModule.LuaVM.DoString (System.String lua, System.String chunk, XLua.LuaTable env) (at Assets/KiwiFramework/Core/XLuaModule/LuaVM.cs:105)
+KiwiFramework.Core.XLuaModule.LuaVM.DoFile (System.String luaName, XLua.LuaTable luaTable) (at Assets/KiwiFramework/Core/XLuaModule/LuaVM.cs:100)
+KiwiFramework.Core.AppLauncher.Start () (at Assets/KiwiFramework/Core/AppLauncher.cs:19)
+UnityEngine.DebugLogHandler:LogException(Exception, Object)
+KiwiFramework.Core.KiwiLogHandler:LogException(Exception, Object) (at Assets/KiwiFramework/Core/Log/KiwiLogHandler.cs:141)
+UnityEngine.Logger:LogException(Exception)
+KiwiFramework.Core.KiwiLog:Exception(Exception) (at Assets/KiwiFramework/Core/Log/KiwiLog.cs:153)
+KiwiFramework.Core.AppLauncher:Start() (at Assets/KiwiFramework/Core/AppLauncher.cs:26)
 

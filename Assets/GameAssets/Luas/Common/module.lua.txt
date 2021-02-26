@@ -1,10 +1,12 @@
 ---module 模块
----@param modName string 模块名称 
----@param table table Lua table
-function module(modName , table)
-    _G[modName] = table
-    package.loaded[modName] = table
-    setmetatable(table , { __index = _G })
-    _ENV[modName] = table
-    return table
+---@param modName string 模块名称
+---@return table
+function module(modName)
+    local tab = {}
+    _G[modName] = tab
+    print(modName)
+    package.loaded[modName] = tab
+    setmetatable(tab , { __index = _G })
+    _ENV[modName] = tab
+    return tab
 end

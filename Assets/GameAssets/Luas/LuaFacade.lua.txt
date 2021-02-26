@@ -2,12 +2,14 @@
 --- LuaFacade.lua
 ---
 
----@module LuaFacade
-local LuaFacade = {}
 
-module(... , LuaFacade)
+---@module LuaFacade
+local LuaFacade = module(...)
+local log = Log.Create("LuaFacade")
 ----------------------------------------------------------------------------------
 
-
+function LuaFacade.Test(msg)
+    log:Info(msg , " : " , msg)
+end
 
 return LuaFacade
