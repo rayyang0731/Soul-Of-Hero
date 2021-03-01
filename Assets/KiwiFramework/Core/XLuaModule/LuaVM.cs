@@ -62,14 +62,17 @@ namespace KiwiFramework.Core.XLuaModule
         /// </summary>
         private static bool LuaLoader(string luaFileName, out string lua)
         {
-            using (zstring.Block())
+            if (luaFileName == "emmy_core")
             {
-                var textAsset = AssetManager.Instance.Load<TextAsset>(zstring.Concat(luaFileName, ".lua"));
-                if (textAsset.text != null)
-                {
-                    lua = textAsset.text;
-                    return true;
-                }
+                lua = null;
+                return false;
+            }
+
+            var textAsset = AssetManager.Instance.Load<TextAsset>(luaFileName);
+            if (textAsset.text != null)
+            {
+                lua = textAsset.text;
+                return true;
             }
 
             lua = string.Empty;

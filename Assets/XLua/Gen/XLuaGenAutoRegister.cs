@@ -160,6 +160,9 @@ namespace XLua.CSObjectWrap
             translator.DelayWrapLoader(typeof(XLuaTest.FooExtension), XLuaTestFooExtensionWrap.__Register);
         
         
+            translator.DelayWrapLoader(typeof(KiwiFramework.Core.ProjectIniSetting), KiwiFrameworkCoreProjectIniSettingWrap.__Register);
+        
+        
             translator.DelayWrapLoader(typeof(KiwiFramework.Core.KiwiLog), KiwiFrameworkCoreKiwiLogWrap.__Register);
         
         

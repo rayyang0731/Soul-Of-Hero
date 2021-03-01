@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using XLua;
 
 #if UNITY_EDITOR
 
@@ -10,6 +11,7 @@ namespace KiwiFramework.Core
     /// <summary>
     /// 工程配置文件管理工具
     /// </summary>
+    [LuaCallCSharp]
     public static class ProjectIniSetting
     {
         private static string IniPath => Application.dataPath + "/KiwiFramework/ProjectConfig.ini";
