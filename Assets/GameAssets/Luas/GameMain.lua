@@ -1,5 +1,5 @@
-Log = require("Log")
-LuaFacade = require("LuaFacade")
+_G["Log"] = require("Log")
+_G["LuaFacade"] = require("LuaFacade")
 
 --if CS.KiwiFramework.Core.ProjectIniSetting.GetInt("Game", "Develop") == 1 then
 --region ----------EmmyLua Remote Debugger----------
@@ -11,6 +11,6 @@ LuaFacade = require("LuaFacade")
 --endregion
 --end
 
-LuaFacade:RegisterCommand("Startup", "StartupCommand")
-LuaFacade:ExecuteCommand("Startup", { msg = "Test Msg" })
---LuaFacade:
+LuaFacade.RegisterCommand("Startup")
+LuaFacade.ExecuteCommand("Startup", { msg = "Test Msg" })
+LuaFacade.RemoveCommand("Startup")

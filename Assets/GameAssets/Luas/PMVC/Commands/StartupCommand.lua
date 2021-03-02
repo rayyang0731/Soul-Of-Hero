@@ -12,6 +12,7 @@ local log = Log.Create("StartupCommand")
 --region ----------构造函数----------
 
 function _M:new()
+    ---@type AbstractCommand
     local abstractCommand = require("AbstractCommand"):new("StartupCommand")
     return setmetatable(_M, { __index = abstractCommand })
 end
