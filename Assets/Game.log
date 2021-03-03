@@ -45,12 +45,22 @@ KiwiFramework.Core.XLuaModule.LuaVM:DoString(String, String, LuaTable) (at Asset
 KiwiFramework.Core.XLuaModule.LuaVM:DoFile(String, LuaTable) (at Assets/KiwiFramework/Core/XLuaModule/LuaVM.cs:103)
 KiwiFramework.Core.AppLauncher:Start() (at Assets/KiwiFramework/Core/AppLauncher.cs:19)
 
-[SoulOfHero]: [INFO][LuaFacade:18] >>> Register command : Startup | StartupCommand
+LUA: table: 0x7ff9b36f1d00
+UnityEngine.Debug:Log(Object)
+XLua.StaticLuaCallbacks:Print(IntPtr) (at Assets/XLua/Src/StaticLuaCallbacks.cs:629)
+XLua.LuaDLL.Lua:lua_pcall(IntPtr, Int32, Int32, Int32)
+XLua.LuaEnv:DoString(Byte[], String, LuaTable) (at Assets/XLua/Src/LuaEnv.cs:268)
+XLua.LuaEnv:DoString(String, String, LuaTable) (at Assets/XLua/Src/LuaEnv.cs:288)
+KiwiFramework.Core.XLuaModule.LuaVM:DoString(String, String, LuaTable) (at Assets/KiwiFramework/Core/XLuaModule/LuaVM.cs:108)
+KiwiFramework.Core.XLuaModule.LuaVM:DoFile(String, LuaTable) (at Assets/KiwiFramework/Core/XLuaModule/LuaVM.cs:103)
+KiwiFramework.Core.AppLauncher:Start() (at Assets/KiwiFramework/Core/AppLauncher.cs:19)
+
+[SoulOfHero]: [INFO][LuaFacade:21] >>> Register command : Startup
 stack traceback:
 	Log:150: in upvalue 'Print'
 	Log:202: in method 'Info'
-	LuaFacade:18: in function 'LuaFacade.RegisterCommand'
-	GameMain:14: in main chunk
+	LuaFacade:21: in function 'LuaFacade.RegisterCommand'
+	GameMain:28: in main chunk
 	[C]: in function 'require'
 	[string "GameMain"]:1: in main chunk
 UnityEngine.DebugLogHandler:LogFormat(LogType, Object, String, Object[])
@@ -66,47 +76,31 @@ KiwiFramework.Core.XLuaModule.LuaVM:DoString(String, String, LuaTable) (at Asset
 KiwiFramework.Core.XLuaModule.LuaVM:DoFile(String, LuaTable) (at Assets/KiwiFramework/Core/XLuaModule/LuaVM.cs:103)
 KiwiFramework.Core.AppLauncher:Start() (at Assets/KiwiFramework/Core/AppLauncher.cs:19)
 
-[SoulOfHero]: [INFO][LuaFacade:26] >>> Execute command : Startup
+LuaException: c# exception in LoadFromCustomLoaders:System.Collections.Generic.KeyNotFoundException: The given key was not present in the dictionary.
+  at System.Collections.Generic.Dictionary`2[TKey,TValue].get_Item (TKey key) [0x0001e] in <9577ac7a62ef43179789031239ba8798>:0 
+  at KiwiFramework.Core.AssetLoaderForEditor.GetAssetPath (System.String name) [0x000ae] in /Users/wasabiyu/Documents/Git/Soul Of Hero/Assets/KiwiFramework/Core/ResourceManagement/AssetLoaderForEditor.cs:72 
+  at KiwiFramework.Core.AssetLoaderForEditor.Load[T] (System.String name) [0x00000] in /Users/wasabiyu/Documents/Git/Soul Of Hero/Assets/KiwiFramework/Core/ResourceManagement/AssetLoaderForEditor.cs:97 
+  at KiwiFramework.Core.AssetManager.Load[T] (System.String name) [0x00000] in /Users/wasabiyu/Documents/Git/Soul Of Hero/Assets/KiwiFramework/Core/ResourceManagement/AssetManager.cs:28 
+  at KiwiFramework.Core.XLuaModule.LuaVM.LuaLoader (System.String luaFileName, System.String& lua) [0x00012] in /Users/wasabiyu/Documents/Git/Soul Of Hero/Assets/KiwiFramework/Core/XLuaModule/LuaVM.cs:71 
+  at KiwiFramework.Core.XLuaModule.LuaVM.OnLoader (System.String& luaFileName) [0x00000] in /Users/wasabiyu/Documents/Git/Soul Of Hero/Assets/KiwiFramework/Core/XLuaModule/LuaVM.cs:56 
+  at XLua.StaticLuaCallbacks.LoadFromCustomLoaders (System.IntPtr L) [0x0002e] in /Users/wasabiyu/Documents/Git/Soul Of Hero/Assets/XLua/Src/StaticLuaCallbacks.cs:786 
 stack traceback:
-	Log:150: in upvalue 'Print'
-	Log:202: in method 'Info'
-	LuaFacade:26: in function 'LuaFacade.ExecuteCommand'
-	GameMain:15: in main chunk
+	[C]: in ?
+	[C]: in function 'require'
+	LuaController:18: in function 'LuaController.RegisterCommand'
+	LuaFacade:22: in function 'LuaFacade.RegisterCommand'
+	GameMain:28: in main chunk
 	[C]: in function 'require'
 	[string "GameMain"]:1: in main chunk
-UnityEngine.DebugLogHandler:LogFormat(LogType, Object, String, Object[])
-KiwiFramework.Core.KiwiLogHandler:LogFormat(LogType, Object, String, Object[]) (at Assets/KiwiFramework/Core/Log/KiwiLogHandler.cs:136)
-UnityEngine.Logger:Log(LogType, String, Object, Object)
-KiwiFramework.Core.KiwiLog:Print(LogType, String, Object) (at Assets/KiwiFramework/Core/Log/KiwiLog.cs:175)
-KiwiFramework.Core.KiwiLog:Info(String) (at Assets/KiwiFramework/Core/Log/KiwiLog.cs:51)
-XLua.CSObjectWrap.KiwiFrameworkCoreKiwiLogWrap:_m_Info_xlua_st_(IntPtr) (at Assets/XLua/Gen/KiwiFramework_Core_KiwiLogWrap.cs:85)
-XLua.LuaDLL.Lua:lua_pcall(IntPtr, Int32, Int32, Int32)
-XLua.LuaEnv:DoString(Byte[], String, LuaTable) (at Assets/XLua/Src/LuaEnv.cs:268)
-XLua.LuaEnv:DoString(String, String, LuaTable) (at Assets/XLua/Src/LuaEnv.cs:288)
-KiwiFramework.Core.XLuaModule.LuaVM:DoString(String, String, LuaTable) (at Assets/KiwiFramework/Core/XLuaModule/LuaVM.cs:108)
-KiwiFramework.Core.XLuaModule.LuaVM:DoFile(String, LuaTable) (at Assets/KiwiFramework/Core/XLuaModule/LuaVM.cs:103)
-KiwiFramework.Core.AppLauncher:Start() (at Assets/KiwiFramework/Core/AppLauncher.cs:19)
-
-[SoulOfHero]: [INFO][StartupCommand:26] >>> 执行指令 : StartupCommand|Test Msg
-stack traceback:
-	Log:150: in upvalue 'Print'
-	Log:202: in method 'Info'
-	StartupCommand:26: in function 'StartupCommand.Execute'
-	LuaController:27: in function 'LuaController.ExecuteCommand'
-	LuaFacade:27: in function 'LuaFacade.ExecuteCommand'
-	GameMain:15: in main chunk
-	[C]: in function 'require'
-	[string "GameMain"]:1: in main chunk
-UnityEngine.DebugLogHandler:LogFormat(LogType, Object, String, Object[])
-KiwiFramework.Core.KiwiLogHandler:LogFormat(LogType, Object, String, Object[]) (at Assets/KiwiFramework/Core/Log/KiwiLogHandler.cs:136)
-UnityEngine.Logger:Log(LogType, String, Object, Object)
-KiwiFramework.Core.KiwiLog:Print(LogType, String, Object) (at Assets/KiwiFramework/Core/Log/KiwiLog.cs:175)
-KiwiFramework.Core.KiwiLog:Info(String) (at Assets/KiwiFramework/Core/Log/KiwiLog.cs:51)
-XLua.CSObjectWrap.KiwiFrameworkCoreKiwiLogWrap:_m_Info_xlua_st_(IntPtr) (at Assets/XLua/Gen/KiwiFramework_Core_KiwiLogWrap.cs:85)
-XLua.LuaDLL.Lua:lua_pcall(IntPtr, Int32, Int32, Int32)
-XLua.LuaEnv:DoString(Byte[], String, LuaTable) (at Assets/XLua/Src/LuaEnv.cs:268)
-XLua.LuaEnv:DoString(String, String, LuaTable) (at Assets/XLua/Src/LuaEnv.cs:288)
-KiwiFramework.Core.XLuaModule.LuaVM:DoString(String, String, LuaTable) (at Assets/KiwiFramework/Core/XLuaModule/LuaVM.cs:108)
-KiwiFramework.Core.XLuaModule.LuaVM:DoFile(String, LuaTable) (at Assets/KiwiFramework/Core/XLuaModule/LuaVM.cs:103)
-KiwiFramework.Core.AppLauncher:Start() (at Assets/KiwiFramework/Core/AppLauncher.cs:19)
+XLua.LuaEnv.ThrowExceptionFromError (System.Int32 oldTop) (at Assets/XLua/Src/LuaEnv.cs:441)
+XLua.LuaEnv.DoString (System.Byte[] chunk, System.String chunkName, XLua.LuaTable env) (at Assets/XLua/Src/LuaEnv.cs:274)
+XLua.LuaEnv.DoString (System.String chunk, System.String chunkName, XLua.LuaTable env) (at Assets/XLua/Src/LuaEnv.cs:288)
+KiwiFramework.Core.XLuaModule.LuaVM.DoString (System.String lua, System.String chunk, XLua.LuaTable env) (at Assets/KiwiFramework/Core/XLuaModule/LuaVM.cs:108)
+KiwiFramework.Core.XLuaModule.LuaVM.DoFile (System.String luaName, XLua.LuaTable luaTable) (at Assets/KiwiFramework/Core/XLuaModule/LuaVM.cs:103)
+KiwiFramework.Core.AppLauncher.Start () (at Assets/KiwiFramework/Core/AppLauncher.cs:19)
+UnityEngine.DebugLogHandler:LogException(Exception, Object)
+KiwiFramework.Core.KiwiLogHandler:LogException(Exception, Object) (at Assets/KiwiFramework/Core/Log/KiwiLogHandler.cs:141)
+UnityEngine.Logger:LogException(Exception)
+KiwiFramework.Core.KiwiLog:Exception(Exception) (at Assets/KiwiFramework/Core/Log/KiwiLog.cs:153)
+KiwiFramework.Core.AppLauncher:Start() (at Assets/KiwiFramework/Core/AppLauncher.cs:26)
 

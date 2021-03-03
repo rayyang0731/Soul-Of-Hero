@@ -57,33 +57,8 @@ namespace KiwiFramework.Core
         public void ExecuteCommand(INotice notice)
         {
             KiwiLog.InfoFormat("Execute command: {0}", notice.Name);
-#if UseLua
-            // LuaVM.Instance.ExecuteCmd(notice);
-#else
             Controller.Instance.ExecuteCommand(notice);
-#endif
         }
-
-#if UseLua
-        /// <summary>
-        /// 注册 Lua 指令
-        /// </summary>
-        /// <param name="commandType">指令类型</param>
-        /// <param name="commandTag">指令标签</param>
-        public void RegisterLuaCommand(string commandType, string commandTag)
-        {
-            // LuaVM.Instance.AddCmd(commandType, commandTag);
-        }
-
-        /// <summary>
-        /// 移除 Lua 指令
-        /// </summary>
-        /// <param name="commandTag">指令标签</param>
-        public void RemoveLuaCommand(string commandTag)
-        {
-            // LuaVM.Instance.RemoveCmd(commandTag);
-        }
-#endif
 
         #endregion
 
