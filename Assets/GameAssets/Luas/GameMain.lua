@@ -11,6 +11,7 @@ _G["LuaFacade"] = require("LuaFacade")
 --endregion
 --end
 
+
 LuaFacade.RegisterCommand("Startup")
 LuaFacade.ExecuteCommand("Startup", { msg = "Test Msg" })
 LuaFacade.RemoveCommand("Startup")

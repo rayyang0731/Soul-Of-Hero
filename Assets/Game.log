@@ -45,7 +45,7 @@ KiwiFramework.Core.XLuaModule.LuaVM:DoString(String, String, LuaTable) (at Asset
 KiwiFramework.Core.XLuaModule.LuaVM:DoFile(String, LuaTable) (at Assets/KiwiFramework/Core/XLuaModule/LuaVM.cs:103)
 KiwiFramework.Core.AppLauncher:Start() (at Assets/KiwiFramework/Core/AppLauncher.cs:19)
 
-LUA: table: 0x7ff9b36f1d00
+LUA: function
 UnityEngine.Debug:Log(Object)
 XLua.StaticLuaCallbacks:Print(IntPtr) (at Assets/XLua/Src/StaticLuaCallbacks.cs:629)
 XLua.LuaDLL.Lua:lua_pcall(IntPtr, Int32, Int32, Int32)
@@ -60,7 +60,7 @@ stack traceback:
 	Log:150: in upvalue 'Print'
 	Log:202: in method 'Info'
 	LuaFacade:21: in function 'LuaFacade.RegisterCommand'
-	GameMain:28: in main chunk
+	GameMain:16: in main chunk
 	[C]: in function 'require'
 	[string "GameMain"]:1: in main chunk
 UnityEngine.DebugLogHandler:LogFormat(LogType, Object, String, Object[])
@@ -89,7 +89,7 @@ stack traceback:
 	[C]: in function 'require'
 	LuaController:18: in function 'LuaController.RegisterCommand'
 	LuaFacade:22: in function 'LuaFacade.RegisterCommand'
-	GameMain:28: in main chunk
+	GameMain:16: in main chunk
 	[C]: in function 'require'
 	[string "GameMain"]:1: in main chunk
 XLua.LuaEnv.ThrowExceptionFromError (System.Int32 oldTop) (at Assets/XLua/Src/LuaEnv.cs:441)

@@ -90,7 +90,8 @@ end
 --region ----------Mediator----------
 
 function _M.RegisterMediator(moduleName)
-    
+    log:Info("RegisterMediator : ", moduleName)
+    return 
 end
 
 --endregion
