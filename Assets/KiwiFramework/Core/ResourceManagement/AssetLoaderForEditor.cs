@@ -60,7 +60,7 @@ namespace KiwiFramework.Core
                 {
                     var path = AssetDatabase.GUIDToAssetPath(guid);
                     var fileName = Path.GetFileNameWithoutExtension(path);
-                    if (fileName != name)
+                    if (fileName != name || !Path.HasExtension(path))
                         continue;
                     repeatAssets.Add(path);
                     if (_allAssetPaths.ContainsKey(name))

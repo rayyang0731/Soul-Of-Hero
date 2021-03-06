@@ -5,9 +5,6 @@
 ---@class Log
 local _M = { _VERSION = "1.0" }
 
----@type KiwiFramework.Core.KiwiLog
-local KiwiLog = CS.KiwiFramework.Core.KiwiLog
-
 ----------------------------------------------------------------------------------
 
 ---Log 等级定义

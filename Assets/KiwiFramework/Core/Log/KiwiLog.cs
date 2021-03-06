@@ -11,7 +11,6 @@ namespace KiwiFramework.Core
     /// <summary>
     /// 打印日志
     /// </summary>
-    [LuaCallCSharp]
     public static partial class KiwiLog
     {
         private static readonly string Tag = "[" + PlayerSettings.productName + "]";

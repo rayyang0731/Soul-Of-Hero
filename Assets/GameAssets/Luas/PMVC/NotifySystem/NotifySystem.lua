@@ -76,6 +76,7 @@ function _M.RemoveListenerForCode(notifyCode, centerName)
 end
 
 ---清除指定消息中心内的所有监听
+---@param centerName string 消息中心名称
 function _M.RemoveAllListener(centerName)
     GetNotifyCenter(centerName):ClearAll()
 end

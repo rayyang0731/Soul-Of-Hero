@@ -244,12 +244,12 @@ namespace KiwiFramework.Core
         protected sealed override void OnAwake()
         {
             OnViewCreated();
-            RegisterCommands();
         }
 
         protected void Start()
         {
             OnViewOpened();
+            RegisterCommands();
             RegisterElements();
         }
 

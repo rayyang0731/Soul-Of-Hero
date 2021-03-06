@@ -7,8 +7,9 @@
 ---@class AbstractMediator
 ---@field name string 代理标签名称
 ---@field Facade LuaFacade Lua 外观角色
+---@field view UIView Lua 界面基类
 local _M = { _VERSION = "1.0" }
-local mt = {__index = _M}
+local mt = { __index = _M }
 
 local log = Log.Create("AbstractMediator")
 ----------------------------------------------------------------------------------

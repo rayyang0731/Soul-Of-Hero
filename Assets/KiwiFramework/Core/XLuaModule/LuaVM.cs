@@ -41,7 +41,7 @@ namespace KiwiFramework.Core.XLuaModule
         /// 创建 Lua Table
         /// </summary>
         /// <returns>Lua Table 对象</returns>
-        public LuaTable CreateTable()
+        public LuaTable NewTable()
         {
             return _luaEnv.NewTable();
         }

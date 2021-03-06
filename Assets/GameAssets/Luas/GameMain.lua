@@ -1,4 +1,7 @@
+require("CSDefine")
+
 _G["Log"] = require("Log")
+_G["CommandTag"] = require("CommandTag")
 _G["LuaFacade"] = require("LuaFacade")
 
 --if CS.KiwiFramework.Core.ProjectIniSetting.GetInt("Game", "Develop") == 1 then
@@ -12,6 +15,5 @@ _G["LuaFacade"] = require("LuaFacade")
 --end
 
 
-LuaFacade.RegisterCommand("Startup")
-LuaFacade.ExecuteCommand("Startup", { msg = "Test Msg" })
-LuaFacade.RemoveCommand("Startup")
+LuaFacade.RegisterCommand(CommandTag.STARTUP)
+LuaFacade.ExecuteCommand(CommandTag.STARTUP)

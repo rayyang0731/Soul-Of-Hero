@@ -24,7 +24,14 @@ end
 ---执行指令
 ---@param data table 数据
 function _M:Execute(data)
-    log:Info("执行指令 : ", self.name, "|", data.msg)
+    log:Info("App Startup...")
+
+    LuaFacade.RemoveCommand(CommandTag.STARTUP)
+
+    SceneManager.LoadScene("Game")
+
+    LuaFacade.RegisterCommand(CommandTag.LOGIN)
+    LuaFacade.ExecuteCommand(CommandTag.LOGIN)
 end
 
 --endregion

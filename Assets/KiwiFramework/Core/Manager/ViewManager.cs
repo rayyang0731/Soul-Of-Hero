@@ -271,27 +271,31 @@ namespace KiwiFramework.Core
         /// 打开界面
         /// </summary>
         /// <param name="viewName">界面名称</param>
+        /// <param name="viewAlias">界面别名</param>
         /// <returns>被打开的界面对象</returns>
-        public BaseView OpenView(string viewName)
+        public BaseView OpenView(string viewName, string viewAlias = null)
         {
-            if (_allViewMap.TryGetValue(viewName, out var view))
+            if (viewAlias == null)
+                viewAlias = viewName;
+
+            if (_allViewMap.TryGetValue(viewAlias, out var view))
             {
                 view.Resume();
                 return view;
             }
 
-            var viewGo = AssetManager.Instance.Load<GameObject>(viewName);
+            var viewGo = AssetManager.Instance.Load<GameObject>(viewAlias);
             var viewDefine = viewGo.GetComponent<ViewDefine>();
 
             viewGo = Instantiate(viewGo, GetSubCanvas(viewDefine.SortLayer).rectTransform());
-            viewGo.name = viewName;
+            viewGo.name = viewAlias;
             view = viewGo.ForceGetComponent(viewName) as BaseView;
 
-            _allViewMap.Add(viewName, view);
+            _allViewMap.Add(viewAlias, view);
 
             if (view != null && view.define.ViewLogicType != VIEW_LOGIC_TYPE.ROLLBACK) return view;
 
-            TryToPushInRollbackStack(viewName);
+            TryToPushInRollbackStack(viewAlias);
 
             ControlSubCanvasDisplay();
 
