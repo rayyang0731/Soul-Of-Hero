@@ -10,4 +10,4 @@ _G["SceneManager"] = CS.UnityEngine.SceneManagement.SceneManager
 _G["LoadSceneMode"] = CS.UnityEngine.SceneManagement.LoadSceneMode
 
 ---@type KiwiFramework.Core.ViewManager
-_G["ViewManager"] = CS.KiwiFramework.Core.ViewManager
+_G["ViewManager"] = CS.KiwiFramework.Core.ViewManager.Instance

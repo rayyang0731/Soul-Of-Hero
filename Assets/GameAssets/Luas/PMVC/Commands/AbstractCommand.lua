@@ -13,6 +13,7 @@ local log = Log.Create("AbstractCommand")
 --region ----------构造函数----------
 
 ---@param tag string 指令标签名称
+---@return AbstractCommand
 function _M:new(tag)
     return setmetatable({ name = tag, Facade = LuaFacade }, mt)
 end

@@ -1,9 +1,11 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using KiwiFramework.Core;
 using KiwiFramework.Core.Interface;
 using Sirenix.OdinInspector;
 using Sirenix.Utilities;
+using XLua;
 
 namespace KiwiFramework.Core
 {
@@ -13,6 +15,85 @@ namespace KiwiFramework.Core
     [HideMonoScript]
     public abstract class BaseView : ViewMonoBehaviour
     {
+#if UseLua
+        private string _tableName;
+
+        private LuaTable _luaScript;
+
+        private Action _luaStart;
+        private Action _luaOnUpdate;
+        private Action _luaOnLateUpdate;
+        private Action _luaOnDestroyed;
+
+        public void Bind(string tableName, LuaTable luaScript)
+        {
+            _tableName = tableName;
+
+            _luaScript = luaScript;
+            _luaScript.Set("view", this);
+
+            _luaScript.Get("Start", out _luaStart);
+            _luaScript.Get("OnUpdate", out _luaOnUpdate);
+            _luaScript.Get("OnLateUpdate", out _luaOnLateUpdate);
+            _luaScript.Get("OnDestroyed", out _luaOnDestroyed);
+        }
+
+        protected sealed override void OnAwake()
+        {
+        }
+
+        protected void Start()
+        {
+            _luaStart?.Invoke();
+        }
+
+        public sealed override void OnUpdate()
+        {
+            _luaOnUpdate?.Invoke();
+        }
+
+        public sealed override void OnLateUpdate()
+        {
+            _luaOnLateUpdate?.Invoke();
+        }
+
+        protected sealed override void OnDestroyed()
+        {
+            _luaOnDestroyed?.Invoke();
+        }
+#else
+        #region Unity Lifecycle Methods
+
+        protected sealed override void OnAwake()
+        {
+            OnViewCreated();
+        }
+
+        protected void Start()
+        {
+            OnViewOpened();
+            RegisterCommands();
+            RegisterElements();
+        }
+
+        public sealed override void OnUpdate()
+        {
+            OnViewUpdate();
+        }
+
+        public sealed override void OnLateUpdate()
+        {
+            OnViewLateUpdate();
+        }
+
+        protected sealed override void OnDestroyed()
+        {
+            OnViewDestroyed();
+        }
+
+        #endregion
+#endif
+
         #region Framework
 
         #region Command
@@ -235,37 +316,6 @@ namespace KiwiFramework.Core
         /// </summary>
         protected virtual void OnViewHide()
         {
-        }
-
-        #endregion
-
-        #region Unity Lifecycle Methods
-
-        protected sealed override void OnAwake()
-        {
-            OnViewCreated();
-        }
-
-        protected void Start()
-        {
-            OnViewOpened();
-            RegisterCommands();
-            RegisterElements();
-        }
-
-        public sealed override void OnUpdate()
-        {
-            OnViewUpdate();
-        }
-
-        public sealed override void OnLateUpdate()
-        {
-            OnViewLateUpdate();
-        }
-
-        protected sealed override void OnDestroyed()
-        {
-            OnViewDestroyed();
         }
 
         #endregion

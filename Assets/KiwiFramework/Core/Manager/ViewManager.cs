@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using KiwiFramework.Core.XLuaModule;
 using KiwiFramework.UI;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -300,6 +301,16 @@ namespace KiwiFramework.Core
             ControlSubCanvasDisplay();
 
             return view;
+        }
+
+        /// <summary>
+        /// 获取界面
+        /// </summary>
+        /// <param name="viewName">界面名称</param>
+        /// <returns>如果获取不到,则返回 null</returns>
+        public BaseView GetView(string viewName)
+        {
+            return _allViewMap.TryGetValue(viewName, out var view) ? view : null;
         }
 
         /// <summary>

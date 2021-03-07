@@ -25,7 +25,7 @@ end
 ---@param data table 数据
 function _M:Execute(data)
     SceneManager.LoadScene("Login", LoadSceneMode.Additive)
-    ViewManager.Instance:OpenView("UILoginView")
+    --ViewManager.Instance:OpenView("UILoginView")
 end
 
 --endregion

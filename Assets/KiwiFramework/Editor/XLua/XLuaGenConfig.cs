@@ -73,6 +73,7 @@ public static class XLuaGenConfig
             typeof(KiwiFramework.Core.KiwiLog),
             typeof(KiwiFramework.Core.ViewManager),
             typeof(KiwiFramework.Core.MonoSingleton<>),
+            typeof(KiwiFramework.Core.XLuaModule.LuaViewBehaviour),
 
             #endregion
         };

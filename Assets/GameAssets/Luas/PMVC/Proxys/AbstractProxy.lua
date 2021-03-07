@@ -13,6 +13,7 @@ local log = Log.Create("AbstractProxy")
 --region ----------构造函数----------
 
 ---@param tag string 代理标签名称
+---@return AbstractProxy
 function _M:new(tag)
     return setmetatable({ name = tag, Facade = LuaFacade }, mt)
 end

@@ -2,6 +2,7 @@ require("CSDefine")
 
 _G["Log"] = require("Log")
 _G["CommandTag"] = require("CommandTag")
+_G["UIManager"] = require("UIManager")
 _G["LuaFacade"] = require("LuaFacade")
 
 --if CS.KiwiFramework.Core.ProjectIniSetting.GetInt("Game", "Develop") == 1 then
