@@ -81,7 +81,9 @@ namespace KiwiFramework.Editor.UI
         }
 
         private const string BaseViewTemplatePath = "Assets/KiwiFramework/Templates/BaseViewTemplate.txt";
+        private const string BaseUIViewLuaTemplatePath = "Assets/KiwiFramework/Templates/BaseUIViewTemplate.txt";
         private const string UIViewTemplatePath = "Assets/KiwiFramework/Templates/UIViewTemplate.txt";
+        private const string UIViewLuaTemplatePath = "Assets/KiwiFramework/Templates/UIViewTemplate.txt";
 
         public List<MemberFieldInfo> GetAllObjects()
         {

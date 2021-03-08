@@ -21,9 +21,10 @@ namespace XLua.CSObjectWrap
         {
 			ObjectTranslator translator = ObjectTranslatorPool.Instance.Find(L);
 			System.Type type = typeof(KiwiFramework.Core.ViewManager);
-			Utils.BeginObjectRegister(type, L, translator, 0, 2, 1, 1);
+			Utils.BeginObjectRegister(type, L, translator, 0, 3, 1, 1);
 			
 			Utils.RegisterFunc(L, Utils.METHOD_IDX, "OpenView", _m_OpenView);
+			Utils.RegisterFunc(L, Utils.METHOD_IDX, "GetView", _m_GetView);
 			Utils.RegisterFunc(L, Utils.METHOD_IDX, "CloseView", _m_CloseView);
 			
 			
@@ -89,11 +90,56 @@ namespace XLua.CSObjectWrap
                 KiwiFramework.Core.ViewManager gen_to_be_invoked = (KiwiFramework.Core.ViewManager)translator.FastGetCSObj(L, 1);
             
             
-                
+			    int gen_param_count = LuaAPI.lua_gettop(L);
+            
+                if(gen_param_count == 3&& (LuaAPI.lua_isnil(L, 2) || LuaAPI.lua_type(L, 2) == LuaTypes.LUA_TSTRING)&& (LuaAPI.lua_isnil(L, 3) || LuaAPI.lua_type(L, 3) == LuaTypes.LUA_TSTRING)) 
+                {
+                    string _viewName = LuaAPI.lua_tostring(L, 2);
+                    string _viewAlias = LuaAPI.lua_tostring(L, 3);
+                    
+                        var gen_ret = gen_to_be_invoked.OpenView( _viewName, _viewAlias );
+                        translator.Push(L, gen_ret);
+                    
+                    
+                    
+                    return 1;
+                }
+                if(gen_param_count == 2&& (LuaAPI.lua_isnil(L, 2) || LuaAPI.lua_type(L, 2) == LuaTypes.LUA_TSTRING)) 
                 {
                     string _viewName = LuaAPI.lua_tostring(L, 2);
                     
                         var gen_ret = gen_to_be_invoked.OpenView( _viewName );
+                        translator.Push(L, gen_ret);
+                    
+                    
+                    
+                    return 1;
+                }
+                
+            } catch(System.Exception gen_e) {
+                return LuaAPI.luaL_error(L, "c# exception:" + gen_e);
+            }
+            
+            return LuaAPI.luaL_error(L, "invalid arguments to KiwiFramework.Core.ViewManager.OpenView!");
+            
+        }
+        
+        [MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+        static int _m_GetView(RealStatePtr L)
+        {
+		    try {
+            
+                ObjectTranslator translator = ObjectTranslatorPool.Instance.Find(L);
+            
+            
+                KiwiFramework.Core.ViewManager gen_to_be_invoked = (KiwiFramework.Core.ViewManager)translator.FastGetCSObj(L, 1);
+            
+            
+                
+                {
+                    string _viewName = LuaAPI.lua_tostring(L, 2);
+                    
+                        var gen_ret = gen_to_be_invoked.GetView( _viewName );
                         translator.Push(L, gen_ret);
                     
                     

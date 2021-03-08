@@ -1,12 +1,12 @@
 ---
---- LuaBaseView
+--- Base&ViewName&
 ---
 
----@class LuaBaseView
+---@class Base&ViewName&
 ---@field name string 指令标签名称
 local _M = { _VERSION = "1.0" }
 local mt = { __index = _M }
-local log = Log.Create("LuaBaseView")
+local log = Log.Create("Base&ViewName&")
 ----------------------------------------------------------------------------------
 
 ---中介器字典
@@ -14,13 +14,13 @@ local log = Log.Create("LuaBaseView")
 local mediatorMap = {}
 
 ---子界面字典
----@type table<string,LuaBaseView>
+---@type table<string,Base&ViewName&>
 local childViewMap = {}
 
 --region ----------构造函数----------
 
 ---@param tag string 界面名称
----@return LuaBaseView
+---@return Base&ViewName&
 function _M:new(tag)
     local m = setmetatable({ name = tag, Facade = LuaFacade }, mt)
     m:OnAwake()
@@ -114,67 +114,73 @@ end
 
 --region ----------Virtual Methods----------
 
----注册指令监听
-function _M:RegisterCommands()
+-----注册指令监听
+--function _M:RegisterCommands()
+--    
+--end
 
-end
+-----注销指令监听
+--function _M:UnregisterCommands()
+--
+--end
 
----注销指令监听
-function _M:UnregisterCommands()
+-----注销 Element(Mediator 中介器)
+-----添加使用 AddMediator 方法,界面关闭时,会自动移除
+--function _M:RegisterElements()
+--
+--end
 
-end
+-----当界面被创建
+-----相当于MonoBehaviour.Awake
+-----只操作数据, 不操作界面中的对象
+--function _M:OnViewCreated()
+--    log:Info("OnViewCreated")
+--end
 
----当界面被创建
----相当于MonoBehaviour.Awake
----只操作数据, 不操作界面中的对象
-function _M:OnViewCreated()
-    log:Info("OnViewCreated")
-end
+-----当界面实例化完成
+-----相当于 MonoBehaviour.Start
+--function _M:OnViewOpened()
+--
+--end
 
----当界面实例化完成
----相当于 MonoBehaviour.Start
-function _M:OnViewOpened()
+-----界面Update
+-----相当于 MonoBehaviour.Update
+--function _M:OnViewUpdate()
+--
+--end
 
-end
+-----界面 LateUpdate
+-----相当于 MonoBehaviour.LateUpdate
+--function _M:OnViewLateUpdate()
+--
+--end
 
----界面Update
----相当于 MonoBehaviour.Update
-function _M:OnViewUpdate()
+-----当界面关闭
+--function _M:OnViewClosed()
+--
+--end
 
-end
+-----当界面被删除
+-----相当于 MonoBehaviour.OnDestroy
+--function _M:OnViewDestroyed()
+--
+--end
 
----界面 LateUpdate
----相当于 MonoBehaviour.LateUpdate
-function _M:OnViewLateUpdate()
+-----当界面被拉起
+-----当从其他界面回到本界面或再次打开本界面时调用
+--function _M:OnViewResume()
+--
+--end
 
-end
+-----当界面显示时调用
+--function _M:OnViewShow()
+--
+--end
 
----当界面关闭
-function _M:OnViewClosed()
-
-end
-
----当界面被删除
----相当于 MonoBehaviour.OnDestroy
-function _M:OnViewDestroyed()
-
-end
-
----当界面被拉起
----当从其他界面回到本界面或再次打开本界面时调用
-function _M:OnViewResume()
-
-end
-
----当界面显示时调用
-function _M:OnViewShow()
-
-end
-
----当界面隐藏时调用
-function _M:OnViewHide()
-
-end
+-----当界面隐藏时调用
+--function _M:OnViewHide()
+--
+--end
 
 --endregion
 
@@ -182,6 +188,11 @@ end
 
 function _M:OnAwake()
     self:OnViewCreated()
+end
+
+function _M:Start()
+    self:OnViewOpened()
+    self:RegisterCommands()
 end
 
 function _M:OnUpdate()
